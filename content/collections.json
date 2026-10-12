@@ -1,0 +1,499 @@
+{
+  "version": 1,
+  "collections": [
+    {
+      "id": "lincoln-papers",
+      "title": "Abraham Lincoln Papers",
+      "downloadable": true,
+      "sources": [
+        {
+          "name": "Library of Congress",
+          "url": "https://www.loc.gov"
+        },
+        {
+          "name": "Project Gutenberg",
+          "url": "https://www.gutenberg.org"
+        }
+      ]
+    },
+    {
+      "id": "augustine-writings",
+      "title": "Augustine of Hippo Writings",
+      "downloadable": true,
+      "sources": [
+        {
+          "name": "Project Gutenberg",
+          "url": "https://www.gutenberg.org"
+        },
+        {
+          "name": "Internet Archive",
+          "url": "https://archive.org"
+        }
+      ]
+    },
+    {
+      "id": "babad-diponegoro",
+      "title": "Babad Diponegoro",
+      "downloadable": true,
+      "sources": [
+        {
+          "name": "Internet Archive",
+          "url": "https://archive.org"
+        },
+        {
+          "name": "British Library Endangered Archives",
+          "url": "https://eap.bl.uk"
+        },
+        {
+          "name": "Wikimedia Commons",
+          "url": "https://commons.wikimedia.org"
+        }
+      ]
+    },
+    {
+      "id": "beethoven-letters",
+      "title": "Beethoven Letters",
+      "downloadable": true,
+      "sources": [
+        {
+          "name": "Project Gutenberg",
+          "url": "https://www.gutenberg.org"
+        }
+      ]
+    },
+    {
+      "id": "darwin-correspondence",
+      "title": "Darwin Correspondence and Working Science",
+      "downloadable": true,
+      "sources": [
+        {
+          "name": "Darwin Correspondence Project",
+          "url": "https://www.darwinproject.ac.uk"
+        },
+        {
+          "name": "Project Gutenberg",
+          "url": "https://www.gutenberg.org"
+        }
+      ]
+    },
+    {
+      "id": "evliya-celebi-travels",
+      "title": "Evliya Celebi Travels",
+      "downloadable": true,
+      "sources": [
+        {
+          "name": "Project Gutenberg",
+          "url": "https://www.gutenberg.org"
+        },
+        {
+          "name": "Internet Archive",
+          "url": "https://archive.org"
+        }
+      ]
+    },
+    {
+      "id": "nightingale-papers",
+      "title": "Florence Nightingale Papers",
+      "downloadable": true,
+      "sources": [
+        {
+          "name": "Project Gutenberg",
+          "url": "https://www.gutenberg.org"
+        },
+        {
+          "name": "Wellcome Collection",
+          "url": "https://wellcomecollection.org"
+        }
+      ]
+    },
+    {
+      "id": "miranda-archive",
+      "title": "Francisco de Miranda Archive",
+      "downloadable": true,
+      "sources": [
+        {
+          "name": "Internet Archive",
+          "url": "https://archive.org"
+        },
+        {
+          "name": "HathiTrust",
+          "url": "https://www.hathitrust.org"
+        },
+        {
+          "name": "Wikisource",
+          "url": "https://wikisource.org"
+        }
+      ]
+    },
+    {
+      "id": "douglass-papers",
+      "title": "Frederick Douglass Papers",
+      "downloadable": true,
+      "sources": [
+        {
+          "name": "Library of Congress",
+          "url": "https://www.loc.gov"
+        }
+      ]
+    },
+    {
+      "id": "teika-diary",
+      "title": "Fujiwara no Teika Diary",
+      "downloadable": false,
+      "sources": [
+        {
+          "name": "e-Museum, Japan",
+          "url": "https://emuseum.nich.go.jp"
+        }
+      ]
+    },
+    {
+      "id": "gandhi-collected-works",
+      "title": "Gandhi Collected Works",
+      "downloadable": true,
+      "sources": [
+        {
+          "name": "Internet Archive",
+          "url": "https://archive.org"
+        },
+        {
+          "name": "Gandhi Heritage Portal",
+          "url": "https://www.gandhiheritageportal.org"
+        }
+      ]
+    },
+    {
+      "id": "witbooi-papers",
+      "title": "Hendrik Witbooi Papers",
+      "downloadable": true,
+      "sources": [
+        {
+          "name": "DBNL",
+          "url": "https://www.dbnl.org"
+        },
+        {
+          "name": "UNESCO",
+          "url": "https://www.unesco.org"
+        }
+      ]
+    },
+    {
+      "id": "thoreau-writings",
+      "title": "Henry David Thoreau Journals and Letters",
+      "downloadable": true,
+      "sources": [
+        {
+          "name": "Project Gutenberg",
+          "url": "https://www.gutenberg.org"
+        }
+      ]
+    },
+    {
+      "id": "ida-b-wells-writings",
+      "title": "Ida B. Wells Writings",
+      "downloadable": true,
+      "sources": [
+        {
+          "name": "Project Gutenberg",
+          "url": "https://www.gutenberg.org"
+        },
+        {
+          "name": "University of Chicago Library",
+          "url": "https://www.lib.uchicago.edu"
+        }
+      ]
+    },
+    {
+      "id": "newton-papers",
+      "title": "Isaac Newton Papers",
+      "downloadable": true,
+      "sources": [
+        {
+          "name": "The Newton Project",
+          "url": "https://www.newtonproject.ox.ac.uk"
+        },
+        {
+          "name": "Chymistry of Isaac Newton",
+          "url": "https://webapp1.dlib.indiana.edu/newton"
+        }
+      ]
+    },
+    {
+      "id": "jane-austen-letters",
+      "title": "Jane Austen Letters",
+      "downloadable": true,
+      "sources": [
+        {
+          "name": "Project Gutenberg",
+          "url": "https://www.gutenberg.org"
+        }
+      ]
+    },
+    {
+      "id": "john-quincy-adams-diary",
+      "title": "John Quincy Adams Diary",
+      "downloadable": true,
+      "sources": [
+        {
+          "name": "Internet Archive",
+          "url": "https://archive.org"
+        },
+        {
+          "name": "Massachusetts Historical Society",
+          "url": "https://www.masshist.org"
+        },
+        {
+          "name": "Primary Source Cooperative",
+          "url": "https://www.primarysourcecoop.org"
+        }
+      ]
+    },
+    {
+      "id": "kartini-letters",
+      "title": "Kartini Letters",
+      "downloadable": true,
+      "sources": [
+        {
+          "name": "Project Gutenberg",
+          "url": "https://www.gutenberg.org"
+        },
+        {
+          "name": "DBNL",
+          "url": "https://www.dbnl.org"
+        }
+      ]
+    },
+    {
+      "id": "tolstoy-diaries",
+      "title": "Leo Tolstoy Diaries",
+      "downloadable": true,
+      "sources": [
+        {
+          "name": "State Tolstoy Museum",
+          "url": "https://www.tolstoy.ru"
+        }
+      ]
+    },
+    {
+      "id": "libanius-letters",
+      "title": "Libanius Letters",
+      "downloadable": true,
+      "sources": [
+        {
+          "name": "Internet Archive",
+          "url": "https://archive.org"
+        },
+        {
+          "name": "Perseids",
+          "url": "https://fgh.perseids.org"
+        }
+      ]
+    },
+    {
+      "id": "lovelace-babbage",
+      "title": "Lovelace, Babbage, and Early Computing",
+      "downloadable": true,
+      "sources": [
+        {
+          "name": "Science Museum Group",
+          "url": "https://collection.sciencemuseumgroup.org.uk"
+        },
+        {
+          "name": "Clay Mathematics Institute",
+          "url": "https://www.claymath.org"
+        }
+      ]
+    },
+    {
+      "id": "maimonides-geniza",
+      "title": "Maimonides in the Cairo Geniza",
+      "downloadable": true,
+      "sources": [
+        {
+          "name": "Princeton Geniza Project",
+          "url": "https://geniza.princeton.edu"
+        },
+        {
+          "name": "Internet Archive",
+          "url": "https://archive.org"
+        },
+        {
+          "name": "Project Gutenberg",
+          "url": "https://www.gutenberg.org"
+        }
+      ]
+    },
+    {
+      "id": "mark-twain-letters",
+      "title": "Mark Twain Letters",
+      "downloadable": true,
+      "sources": [
+        {
+          "name": "Project Gutenberg",
+          "url": "https://www.gutenberg.org"
+        }
+      ]
+    },
+    {
+      "id": "faraday-papers",
+      "title": "Michael Faraday Papers",
+      "downloadable": true,
+      "sources": [
+        {
+          "name": "Royal Institution",
+          "url": "https://www.rigb.org"
+        },
+        {
+          "name": "Project Gutenberg",
+          "url": "https://www.gutenberg.org"
+        },
+        {
+          "name": "AIM25 London archives",
+          "url": "https://atom.aim25.com"
+        }
+      ]
+    },
+    {
+      "id": "naser-al-din-shah-diary",
+      "title": "Naser al-Din Shah Diary",
+      "downloadable": true,
+      "sources": [
+        {
+          "name": "Internet Archive",
+          "url": "https://archive.org"
+        }
+      ]
+    },
+    {
+      "id": "occom-papers",
+      "title": "Samson Occom Papers",
+      "downloadable": true,
+      "sources": [
+        {
+          "name": "Dartmouth Library",
+          "url": "https://collections.dartmouth.edu"
+        },
+        {
+          "name": "Internet Archive",
+          "url": "https://archive.org"
+        }
+      ]
+    },
+    {
+      "id": "pepys-diary",
+      "title": "Samuel Pepys Diary",
+      "downloadable": true,
+      "sources": [
+        {
+          "name": "Project Gutenberg",
+          "url": "https://www.gutenberg.org"
+        }
+      ]
+    },
+    {
+      "id": "babur-nama",
+      "title": "The Baburnama",
+      "downloadable": true,
+      "sources": [
+        {
+          "name": "Internet Archive",
+          "url": "https://archive.org"
+        },
+        {
+          "name": "Project Gutenberg",
+          "url": "https://www.gutenberg.org"
+        }
+      ]
+    },
+    {
+      "id": "jesuit-relations",
+      "title": "The Jesuit Relations and Allied Documents",
+      "downloadable": true,
+      "sources": [
+        {
+          "name": "Internet Archive",
+          "url": "https://archive.org"
+        }
+      ]
+    },
+    {
+      "id": "vangogh-letters",
+      "title": "Van Gogh Letters",
+      "downloadable": true,
+      "sources": [
+        {
+          "name": "Van Gogh Letters Project",
+          "url": "https://vangoghletters.org"
+        }
+      ]
+    },
+    {
+      "id": "whitman-papers",
+      "title": "Walt Whitman Papers",
+      "downloadable": true,
+      "sources": [
+        {
+          "name": "Walt Whitman Archive",
+          "url": "https://whitmanarchive.org"
+        }
+      ]
+    },
+    {
+      "id": "wright-brothers-papers",
+      "title": "Wilbur and Orville Wright Papers",
+      "downloadable": true,
+      "sources": [
+        {
+          "name": "Library of Congress",
+          "url": "https://www.loc.gov"
+        },
+        {
+          "name": "Internet Archive",
+          "url": "https://archive.org"
+        },
+        {
+          "name": "Project Gutenberg",
+          "url": "https://www.gutenberg.org"
+        }
+      ]
+    },
+    {
+      "id": "xu-xiake-travels",
+      "title": "Xu Xiake Travel Diaries",
+      "downloadable": true,
+      "sources": [
+        {
+          "name": "Wikisource",
+          "url": "https://wikisource.org"
+        },
+        {
+          "name": "Chinese Text Project",
+          "url": "https://ctext.org"
+        }
+      ]
+    },
+    {
+      "id": "yi-sun-sin-war-diary",
+      "title": "Yi Sun-sin War Diary",
+      "downloadable": true,
+      "sources": [
+        {
+          "name": "Institute for the Translation of Korean Classics",
+          "url": "https://db.itkc.or.kr"
+        },
+        {
+          "name": "Wikisource",
+          "url": "https://wikisource.org"
+        },
+        {
+          "name": "Korea Heritage Service",
+          "url": "https://www.heritage.go.kr"
+        },
+        {
+          "name": "LTI Korea Library",
+          "url": "https://library.ltikorea.or.kr"
+        }
+      ]
+    }
+  ]
+}

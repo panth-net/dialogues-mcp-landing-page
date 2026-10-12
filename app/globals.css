@@ -1,0 +1,532 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-open-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* Desktop screens that are short (e.g. 1280x800): tighten vertical rhythm so
+   the page fits one screen. Phones and zoomed views scroll normally. */
+@custom-variant short (@media (min-width: 1024px) and (max-height: 860px));
+
+/* Screens dense enough to draw the logo's full stripe count at header size. */
+@custom-variant hidpi (@media (min-resolution: 2dppx));
+
+@theme {
+  --color-page: #0b0c10;
+  --color-ink: #ffffff;
+  /* Measured over the brightest 1% of the painting behind the hero text,
+     under the 62% overlay: ink-soft ~7.1:1, ink-muted ~5.7:1. */
+  --color-ink-soft: #e4e1da;
+  --color-ink-muted: #cfcac0;
+  /* Cold slate blue-green. Text over the painting (as above) is ~5.1:1;
+     dark ink on this fill is ~9.9:1. */
+  --color-accent: #a3c6ce;
+  --color-accent-ink: #0c181c;
+}
+
+@layer base {
+  html {
+    background-color: var(--color-page);
+    color: var(--color-ink);
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-accent-ink);
+  }
+  a {
+    text-underline-offset: 3px;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  .bg-layer {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background-color: var(--color-page);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* The URLs are set on the element (app/page.tsx) so they include the base path. */
+    background-image: var(--bg-png);
+    background-image: image-set(var(--bg-webp) type("image/webp"), var(--bg-png) type("image/png"));
+  }
+  /* Even darkening over the whole painting, plus a band at the bottom for
+     the footer. */
+  .bg-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background:
+      linear-gradient(to top, rgb(8 9 12 / 0.5) 0, rgb(8 9 12 / 0.5) 3.5rem, rgb(8 9 12 / 0) 7rem),
+      rgb(8 9 12 / 0.62);
+  }
+  @media (max-width: 1023px) {
+    .bg-overlay {
+      background:
+        linear-gradient(to top, rgb(8 9 12 / 0.78) 0, rgb(8 9 12 / 0.78) 3.5rem, rgb(8 9 12 / 0) 7rem),
+        rgb(8 9 12 / 0.84);
+    }
+  }
+
+  /* Transparent canvas with the passing light, over the darkened painting
+     and under the content. */
+  .light-wave {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .card {
+    border-radius: 1rem;
+    border: 1px solid rgb(255 255 255 / 0.14);
+    background: rgb(14 15 20 / 0.82);
+    box-shadow: 0 20px 50px -20px rgb(0 0 0 / 0.6);
+  }
+
+  .btn-copy {
+    position: relative;
+    display: inline-flex;
+    min-height: 2.25rem;
+    min-width: 6.75rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    background: #ffffff;
+    color: #0b0c10;
+    padding: 0.375rem 0.8rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+      background-color 220ms ease,
+      color 220ms ease;
+  }
+  .btn-copy:active:not(.is-copied) {
+    transform: scale(0.97);
+  }
+  .btn-copy.is-copied,
+  .btn-copy.is-copied:hover {
+    background: var(--color-accent);
+    color: var(--color-accent-ink);
+  }
+  .btn-copy.is-pop {
+    animation: copy-pop 460ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .btn-copy-icon,
+  .btn-copy-label {
+    position: relative;
+    z-index: 1;
+  }
+  .btn-copy-icon {
+    width: 0.9rem;
+    height: 0.9rem;
+    flex: none;
+  }
+  .btn-copy-icon svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .btn-copy-check {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: draw-check 420ms cubic-bezier(0.2, 0.7, 0.2, 1) 60ms forwards;
+  }
+  .btn-copy-sheen {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      105deg,
+      transparent 34%,
+      rgb(255 255 255 / 0.05) 44%,
+      rgb(255 255 255 / 0.72) 50%,
+      rgb(255 255 255 / 0.05) 56%,
+      transparent 66%
+    );
+    transform: translateX(-140%);
+    animation: glass-sweep 720ms cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  }
+  /* Hover: a white-to-light-grey gradient drifts across the button for as
+     long as it is hovered. The layer is twice the button's width with the
+     pattern repeated, so sliding it by half loops seamlessly. Only transform
+     and opacity animate; leaving fades it out. */
+  .btn-copy-gradient {
+    position: absolute;
+    z-index: 0;
+    inset: 0 auto 0 0;
+    width: 200%;
+    pointer-events: none;
+    background: linear-gradient(90deg, #ffffff 0%, #d9d9d9 25%, #ffffff 50%, #d9d9d9 75%, #ffffff 100%);
+    opacity: 0;
+    transform: translateX(-50%);
+    transition: opacity 300ms ease;
+    animation: gradient-drift 1.8s linear infinite paused;
+  }
+  @media (hover: hover) {
+    .btn-copy:hover:not(.is-copied) > .btn-copy-gradient {
+      opacity: 1;
+      animation-play-state: running;
+    }
+  }
+  .btn-copy.is-copied .btn-copy-label,
+  .btn-copy.is-failed .btn-copy-label {
+    animation: label-in 280ms ease;
+  }
+
+  .copy-frame {
+    position: relative;
+  }
+  .copy-frame.is-flash {
+    animation: copy-flash 900ms ease-out;
+  }
+  .copy-text {
+    margin: 0;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    user-select: text;
+    background: none;
+    color: var(--color-ink-soft);
+    font-family: var(--font-mono);
+    font-size: 0.78125rem;
+    line-height: 1.55;
+  }
+  /* Narrow screens: five lines of the setup prompt stay readable, then the
+     text dissolves into the card. "See all" sits in that clear area. */
+  .see-all {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    bottom: 0.45rem;
+    transform: translateX(-50%);
+    align-items: center;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+    background: rgb(8 10 14 / 0.92);
+    color: var(--color-accent);
+    padding: 0.2rem 0.7rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.4;
+    cursor: pointer;
+  }
+  .see-all:hover {
+    color: #fff;
+    border-color: rgb(255 255 255 / 0.7);
+  }
+  @media (max-width: 1023px) {
+    .copy-window.is-clamped {
+      max-height: calc(0.78125rem * 1.55 * 5 + 3.8rem);
+      overflow: hidden;
+    }
+    .copy-window.is-clamped.is-overflowing {
+      -webkit-mask-image: linear-gradient(
+        to bottom,
+        #000 0,
+        #000 calc(100% - 3.8rem),
+        transparent calc(100% - 2.4rem)
+      );
+      mask-image: linear-gradient(
+        to bottom,
+        #000 0,
+        #000 calc(100% - 3.8rem),
+        transparent calc(100% - 2.4rem)
+      );
+    }
+    .see-all {
+      display: inline-flex;
+    }
+  }
+
+  /* GitHub icon: the surface brightens on hover while the shared ripple
+     (below) spreads from behind the mark. */
+  .github-link {
+    --ripple-color: rgb(255 255 255 / 0.42);
+    position: relative;
+    display: inline-flex;
+    height: 2.5rem;
+    width: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    isolation: isolate;
+    border-radius: 999px;
+    border: 1px solid rgb(255 255 255 / 0.14);
+    background: rgb(255 255 255 / 0.04);
+    color: var(--color-ink-soft);
+    transition:
+      color 240ms ease,
+      background-color 280ms ease,
+      border-color 280ms ease,
+      box-shadow 280ms ease;
+  }
+  .github-link svg {
+    position: relative;
+    z-index: 1;
+  }
+  .github-link:hover,
+  .github-link:focus-visible {
+    color: var(--color-ink);
+    background: rgb(255 255 255 / 0.1);
+    border-color: rgb(255 255 255 / 0.34);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.42),
+      inset 0 -1px 0 rgb(255 255 255 / 0.06);
+  }
+
+  /* Ripple: three soft rings leave the center of the parent one after another
+     and keep coming for as long as it is hovered. Only transform and opacity
+     animate, so it runs on the compositor; when not hovered the animation is
+     paused, and leaving fades the rings out instead of cutting them off. The
+     parent must be positioned and clip its overflow. */
+  .ripple {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 360ms ease;
+  }
+  .ripple > span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: var(--ripple-size, 130%);
+    aspect-ratio: 1;
+    translate: -50% -50%;
+    border-radius: 50%;
+    background: radial-gradient(
+      closest-side,
+      transparent 58%,
+      var(--ripple-color) 84%,
+      transparent 100%
+    );
+    opacity: 0;
+    animation: ripple-wave 2.4s cubic-bezier(0.22, 0.55, 0.36, 1) infinite backwards paused;
+  }
+  .ripple > span:nth-child(2) {
+    animation-delay: 0.8s;
+  }
+  .ripple > span:nth-child(3) {
+    animation-delay: 1.6s;
+  }
+  @media (hover: hover) {
+    :hover > .ripple {
+      opacity: 1;
+    }
+    :hover > .ripple > span {
+      animation-play-state: running;
+    }
+  }
+
+  /* Tabs: a sliding underline, no backgrounds. The underline is a 1px-wide
+     bar placed with translateX and stretched with scaleX, so moving it only
+     touches transform. */
+  .tab-bar {
+    border-bottom: 1px solid rgb(255 255 255 / 0.14);
+  }
+  .tab-list {
+    position: relative;
+    display: inline-flex;
+    gap: 1.5rem;
+  }
+  .tab {
+    position: relative;
+    padding: 0.5rem 0 0.6rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-ink-muted);
+    cursor: pointer;
+    transition: color 240ms ease;
+  }
+  .tab:hover,
+  .tab[aria-selected="true"] {
+    color: var(--color-ink);
+  }
+  .tab-indicator {
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 1px;
+    height: 2px;
+    background: var(--color-accent);
+    transform-origin: left center;
+    opacity: 0;
+  }
+  .tab-indicator[data-ready] {
+    opacity: 1;
+  }
+  .tab-indicator[data-animate] {
+    transition: transform 420ms cubic-bezier(0.65, 0, 0.25, 1);
+  }
+  .tab-panels {
+    display: grid;
+  }
+  .tab-panel {
+    grid-area: 1 / 1;
+    min-width: 0;
+    transition:
+      opacity 320ms ease,
+      transform 420ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .tab-panel[data-active="false"] {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(0.35rem);
+    transition:
+      opacity 200ms ease,
+      transform 200ms ease,
+      visibility 0s 200ms;
+  }
+
+  /* Documents tab: a scrolling list that fades out at the bottom. */
+  .doc-list {
+    /* Contains the links' absolutely positioned sr-only text; without it that
+       text escapes the scroller and stretches the page. */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    max-height: 13.5rem;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 0.1rem 0.5rem 1.75rem 0;
+    scrollbar-width: thin;
+    scrollbar-color: rgb(255 255 255 / 0.25) transparent;
+    -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 2.5rem), transparent);
+    mask-image: linear-gradient(to bottom, #000 calc(100% - 2.5rem), transparent);
+  }
+  .doc-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+  .doc-source {
+    color: var(--color-ink-soft);
+    text-decoration: underline;
+    text-decoration-color: rgb(255 255 255 / 0.3);
+    transition:
+      color 200ms ease,
+      text-decoration-color 200ms ease;
+  }
+  .doc-source:hover {
+    color: var(--color-ink);
+    text-decoration-color: var(--color-accent);
+  }
+}
+
+@keyframes glass-sweep {
+  from {
+    transform: translateX(-150%);
+  }
+  to {
+    transform: translateX(150%);
+  }
+}
+
+@keyframes ripple-wave {
+  0% {
+    opacity: 0;
+    transform: scale(0.12);
+  }
+  14% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+@keyframes gradient-drift {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes draw-check {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes copy-pop {
+  0% {
+    transform: scale(0.96);
+  }
+  45% {
+    transform: scale(1.045);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes label-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.2rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes copy-flash {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-accent) 0%, transparent);
+  }
+  16%,
+  42% {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 34%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* The hover ripple, the copy buttons' hover gradient, and the tab
+     transitions are kept on purpose. */
+  *:not(.ripple, .ripple > span, .btn-copy-gradient, .tab-indicator, .tab-panel),
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (forced-colors: active) {
+  .btn-copy,
+  .github-link {
+    border: 1px solid CanvasText;
+  }
+  .ripple,
+  .btn-copy-gradient {
+    display: none;
+  }
+}
