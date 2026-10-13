@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+
+Sitemap: https://panth-net.github.io/dialogues-mcp-landing-page/sitemap.xml

@@ -1,0 +1,4 @@
+:HL["/dialogues-mcp-landing-page/_next/static/chunks/3zn9w5slrc7ez.css","style"]
+:HL["/dialogues-mcp-landing-page/_next/static/media/GeistMono_Variable.p.3ms9vq719j3f8.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/dialogues-mcp-landing-page/_next/static/media/cf514f5d0007dafa-s.p.1wc2mf9hp9pav.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}},"staleTime":300,"buildId":"ixGOP4_iKW8i5Q_N5rq2P"}
