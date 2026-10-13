@@ -1,5 +1,7 @@
 # Dialogues MCP landing page
 
+**Live site:** https://panth-net.github.io/dialogues-mcp-landing-page/
+
 The one-page website for **Dialogues MCP**, a free, open-source helper that runs on
 your computer and lets an AI app (Claude, Codex, Cursor, VS Code, Antigravity) have guided
 conversations with historical diaries and letters. The page explains what
